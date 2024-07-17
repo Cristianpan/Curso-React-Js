@@ -16,7 +16,7 @@ export const AddCategory = ({ onAddCategory }) => {
 
     onAddCategory({
       id: Date.now(),
-      value: inputValue.trim(),
+      name: inputValue.trim(),
     });
     setInputValue("");
   };
