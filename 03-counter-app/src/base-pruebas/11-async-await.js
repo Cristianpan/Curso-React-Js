@@ -1,32 +1,17 @@
+export const getImagen = async () => {
+  try {
+    const apiKey = "dmO8Z1C5PHVgOhfAhvaDs6imr3q8m0SN";
+    const response = await fetch(
+      `https://api.giphy.com/v1/gifs/random?api_key=${apiKey}`
+    );
 
+    const { data } = await response.json();
+    const { url } = data.images.original;
 
-// const getImagenPromesa = () => new Promise( resolve => resolve('https://ajskdhaskjdhajs.com') )
-// getImagenPromesa().then( console.log );
+    return url;
+  } catch (error) {
+    throw new Error("No se ha encontrado la imagen");
+  }
+};
 
-const getImagen = async() => {
-
-    try {
-
-        const apiKey = 'C1khQe3Z7R1W2lfTO9myKeuShdqFYSGC';
-        const resp   = await fetch(`http://api.giphy.com/v1/gifs/random?api_key=${ apiKey }`);
-        const { data } = await resp.json(); 
-
-        const { url } = data.images.original;
-
-        const img = document.createElement('img');
-        img.src = url;
-        document.body.append( img );
-
-    } catch (error) {
-        // manejo del error
-        console.error(error)
-    }
-    
-    
-    
-}
-
- getImagen();
-
-
-
+getImagen();
