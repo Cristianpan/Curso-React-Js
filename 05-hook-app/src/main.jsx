@@ -1,9 +1,10 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import './index.css'
-import { SimpleForm } from './02-useEffect/SimpleForm'
-ReactDOM.createRoot(document.getElementById('root')).render(
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import { MemoHook } from "./06-memo/MemoHook";
+
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <SimpleForm />
-  </React.StrictMode>,
-)
+    <MemoHook />
+  </React.StrictMode>
+);
