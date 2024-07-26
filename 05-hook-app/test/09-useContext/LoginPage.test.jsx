@@ -1,4 +1,4 @@
-import { fireEvent, render } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { UserContext } from "../../src/09-useContext/context/UserContext";
 import { LoginPage } from "../../src/09-useContext/LoginPage";
 
@@ -16,14 +16,9 @@ describe("Prueba en el componente <LoginPage/>", () => {
   });
 
   test("Debe de llamar al setUser al hacer click en el boton", () => {
-    const user = {
-      id: 1,
-      name: "Cristian Pan",
-      email: "correo@correo",
-    };
     const setUserMock = jest.fn();
     render(
-      <UserContext.Provider value={{ user, setUser: setUserMock }}>
+      <UserContext.Provider value={{ user: null, setUser: setUserMock }}>
         <LoginPage />
       </UserContext.Provider>
     );
@@ -31,6 +26,10 @@ describe("Prueba en el componente <LoginPage/>", () => {
     const button = screen.getByRole("button");
     fireEvent.click(button);
 
-    expect(setUserMock).toHaveBeenCalledWith(user);
+    expect(setUserMock).toHaveBeenCalledWith({
+      id: 3,
+      name: "Cristian Pan",
+      email: "pan@gmail.com",
+    });
   });
 });
