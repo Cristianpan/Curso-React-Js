@@ -31,7 +31,7 @@ export const SearchPage = () => {
         <div className="col-5">
           <h4>Searching</h4>
 
-          <form onSubmit={onSubmit(handleSearchSubmit)}>
+          <form aria-label="form" onSubmit={onSubmit(handleSearchSubmit)}>
             <input
               type="search"
               placeholder="Search a hero"
@@ -54,7 +54,7 @@ export const SearchPage = () => {
           <hr />
 
           {(!q || !heroes.length) && (
-            <div className={`alert alert-${!q ? "primary" : "danger"}`}>
+            <div data-testid="alert" className={`alert alert-${!q ? "primary" : "danger"}`}>
               {!q ? (
                 "Search for a hero"
               ) : (

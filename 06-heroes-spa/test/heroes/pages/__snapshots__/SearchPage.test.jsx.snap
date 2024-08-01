@@ -15,7 +15,9 @@ exports[`Pruebas en <SearchPage /> Debe de mostrarse correctamente con valor por
       <h4>
         Searching
       </h4>
-      <form>
+      <form
+        aria-label="form"
+      >
         <input
           autocomplete="off"
           class="form-control"
@@ -40,6 +42,7 @@ exports[`Pruebas en <SearchPage /> Debe de mostrarse correctamente con valor por
       <hr />
       <div
         class="alert alert-primary"
+        data-testid="alert"
       >
         Search for a hero
       </div>
