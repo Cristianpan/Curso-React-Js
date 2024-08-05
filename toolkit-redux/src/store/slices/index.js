@@ -1,1 +1,2 @@
-export * from "./counterSlice"; 
+export { counterSlice } from './counterSlice';
+export * from './pokemon';
