@@ -1,3 +1,21 @@
 .box-shadow {
     box-shadow: 0px 10px 15px 7px rgba(0,0,0,0.1);
 }
+
+.text-animation, .loader-animation {
+    animation: faded 2s infinite; 
+}
+
+@keyframes faded {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}

@@ -1,7 +1,13 @@
 import { LogoutOutlined, MenuOutlined } from "@mui/icons-material";
 import { AppBar, Toolbar, IconButton, Grid, Typography } from "@mui/material";
-
+import { logoutFirebase } from "../../firebase/providers";
 export const Navbar = ({ drawerWidth = 240 }) => {
+
+
+  const onLogout = () => {
+    logoutFirebase(); 
+  }
+
   return (
     <AppBar
       position="fixed"
@@ -17,7 +23,7 @@ export const Navbar = ({ drawerWidth = 240 }) => {
 
         <Grid container direction="row" justifyContent="space-between" alignItems='center'>
           <Typography>JournalApp</Typography>
-          <IconButton color="inherit">
+          <IconButton color="inherit" onClick={onLogout}>
             <LogoutOutlined />
           </IconButton>
         </Grid>

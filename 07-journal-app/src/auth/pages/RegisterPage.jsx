@@ -1,10 +1,44 @@
+import { useDispatch, useSelector } from "react-redux";
 import { Link as RouterLink } from "react-router-dom";
-import { Button, Grid, Link, TextField, Typography } from "@mui/material";
+import {
+  Alert,
+  Button,
+  Grid,
+  Link,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { AuthLayout } from "../layout";
+import { useForm } from "../../hooks";
+import { startCreatingUserWithEmailPassword } from "../../store/auth";
+import { useMemo } from "react";
 export const RegisterPage = () => {
+  const {
+    register,
+    onSubmit,
+    formState: { errors },
+  } = useForm({
+    email: "",
+    password: "",
+    displayName: "",
+  });
+
+  const { status, errorMessage } = useSelector((state) => state.auth);
+
+  const isCheckingAuthentication = useMemo(
+    () => status === "checking",
+    [status]
+  );
+
+  const dispatch = useDispatch();
+
+  const handleSubmit = (data) => {
+    dispatch(startCreatingUserWithEmailPassword(data));
+  };
+
   return (
     <AuthLayout title="Crear Cuenta">
-      <form>
+      <form onSubmit={onSubmit(handleSubmit)} className="animate__animated animate__fadeIn animate__faster">
         <Grid container>
           <Grid item xs={12}>
             <TextField
@@ -14,6 +48,9 @@ export const RegisterPage = () => {
               fullWidth
               size="small"
               sx={{ mb: 3 }}
+              {...register("displayName", { required: true, minLength: 3 })}
+              error={!!errors?.displayName}
+              helperText={errors?.displayName?.message}
             />
           </Grid>
           <Grid item xs={12}>
@@ -24,6 +61,12 @@ export const RegisterPage = () => {
               fullWidth
               size="small"
               sx={{ mb: 3 }}
+              {...register("email", {
+                required: true,
+                pattern: /^[^\s@]+@[^\s@]+\.(com)$/,
+              })}
+              error={!!errors?.email}
+              helperText={errors?.email?.message}
             />
           </Grid>
           <Grid item xs={12}>
@@ -34,11 +77,27 @@ export const RegisterPage = () => {
               fullWidth
               size="small"
               sx={{ mb: 3 }}
+              {...register("password", {
+                required: true,
+                minLength: 6,
+              })}
+              error={!!errors?.password}
+              helperText={errors?.password?.message}
             />
           </Grid>
           <Grid container spacing={2} sx={{ mb: 2 }}>
+            {errorMessage && (
+              <Grid item xs={12}>
+                <Alert severity="error">{errorMessage}</Alert>
+              </Grid>
+            )}
             <Grid item xs={12}>
-              <Button variant="contained" fullWidth>
+              <Button
+                type="submit"
+                variant="contained"
+                fullWidth
+                disabled={isCheckingAuthentication}
+              >
                 Crear Cuenta
               </Button>
             </Grid>
@@ -52,9 +111,9 @@ export const RegisterPage = () => {
                 sx={{
                   color: "primary.main",
                   transition: "color, 0.3s",
-                  ":hover" : {
-                    color: 'black'
-                  }
+                  ":hover": {
+                    color: "black",
+                  },
                 }}
                 color="inherit"
                 to="/auth/login"

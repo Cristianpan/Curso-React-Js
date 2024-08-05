@@ -11,9 +11,15 @@ import {
   Toolbar,
   Typography,
   List,
+  Avatar
 } from "@mui/material";
 
+import { useSelector } from "react-redux";
+
 export const Sidebar = ({ drawerWidth }) => {
+  const { photoURL, displayName } = useSelector((state) => state.auth);
+
+
   return (
     <Box
       component="nav"
@@ -33,13 +39,14 @@ export const Sidebar = ({ drawerWidth }) => {
         }}
       >
         <Toolbar>
+          <Avatar alt={displayName} src={photoURL} sx={{marginRight: 2}} />
           <Typography variant="h6" noWrap component="div">
-            Cristian Pan
+            {displayName}
           </Typography>
         </Toolbar>
         <Divider />
 
-        <List>
+        <List className="animate__animated animate__fadeIn animate__faster">
           {["Enero", "Febrero", "Marzo", "Abril"].map((text) => (
             <ListItem key={text} disablePadding>
               <ListItemButton>
