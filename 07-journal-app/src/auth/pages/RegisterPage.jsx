@@ -10,18 +10,21 @@ import {
 } from "@mui/material";
 import { AuthLayout } from "../layout";
 import { useForm } from "../../hooks";
-import { startCreatingUserWithEmailPassword } from "../../store/auth";
+import { startCreatingUserWithEmailPassword } from "../../store";
 import { useMemo } from "react";
+
+const initialState = {
+  email: "",
+  password: "",
+  displayName: "",
+};
+
 export const RegisterPage = () => {
   const {
     register,
     onSubmit,
     formState: { errors },
-  } = useForm({
-    email: "",
-    password: "",
-    displayName: "",
-  });
+  } = useForm(initialState);
 
   const { status, errorMessage } = useSelector((state) => state.auth);
 
@@ -38,7 +41,10 @@ export const RegisterPage = () => {
 
   return (
     <AuthLayout title="Crear Cuenta">
-      <form onSubmit={onSubmit(handleSubmit)} className="animate__animated animate__fadeIn animate__faster">
+      <form
+        onSubmit={onSubmit(handleSubmit)}
+        className="animate__animated animate__fadeIn animate__faster"
+      >
         <Grid container>
           <Grid item xs={12}>
             <TextField

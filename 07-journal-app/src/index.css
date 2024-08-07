@@ -6,6 +6,21 @@
     animation: faded 2s infinite; 
 }
 
+.clip-text {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.clip-text-1 {
+    line-clamp: 1;
+    -webkit-line-clamp: 1;
+}
+.clip-text-2 {
+    line-clamp: 2;
+    -webkit-line-clamp: 2;
+}
+
 @keyframes faded {
     0% {
         opacity: 1;

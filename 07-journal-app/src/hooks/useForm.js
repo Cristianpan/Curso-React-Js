@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const validationsFunctions = {
   required: (data, rule) => ({
@@ -31,8 +31,16 @@ const validations = {};
 
 export const useForm = (initialForm = {}) => {
   const [errors, setErrors] = useState({});
+  const [lastedInitialForm, setLastedInitialForm] = useState(initialForm); 
   const [inputs, setInputs] = useState(initialForm);
 
+  useEffect(() => {
+    if (JSON.stringify(initialForm) != JSON.stringify(lastedInitialForm)){
+      setLastedInitialForm(initialForm); 
+      setInputs(initialForm); 
+    }
+  }, [initialForm]);
+  
   const onInputChange = ({ target: { name, value } }) => {
     setInputs({ ...inputs, [name]: value });
     setErrors(validate(name, value));

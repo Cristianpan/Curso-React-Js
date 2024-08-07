@@ -2,7 +2,6 @@ import {
   signInWithGoogle,
   registerUserWithEmailPassword,
   loginWithEmailPassword,
-  logoutFirebase,
 } from "../../firebase/providers";
 import { checkingCredentials, login, logout } from "./authSlice";
 

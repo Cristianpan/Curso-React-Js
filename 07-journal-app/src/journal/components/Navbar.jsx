@@ -1,6 +1,6 @@
 import { LogoutOutlined, MenuOutlined } from "@mui/icons-material";
 import { AppBar, Toolbar, IconButton, Grid, Typography } from "@mui/material";
-import { logoutFirebase } from "../../firebase/providers";
+import { logoutFirebase } from "../../firebase";
 export const Navbar = ({ drawerWidth = 240 }) => {
 
 

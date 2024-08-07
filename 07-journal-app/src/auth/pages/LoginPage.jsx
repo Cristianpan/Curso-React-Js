@@ -1,25 +1,34 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Google } from "@mui/icons-material";
 import { Link as RouterLink } from "react-router-dom";
-import { Button, Grid, Link, TextField, Typography, Alert} from "@mui/material";
+import {
+  Button,
+  Grid,
+  Link,
+  TextField,
+  Typography,
+  Alert,
+} from "@mui/material";
 import { AuthLayout } from "../layout";
 import { useForm } from "../../hooks";
 import {
-  checkingAuthentication,
   startGoogleSignIn,
   startLoginWithEmailPassword,
-} from "../../store/auth/thunks";
+} from "../../store/auth";
 import { useMemo } from "react";
+
+const initialState = {
+  email: "",
+  password: "",
+};
+
 export const LoginPage = () => {
   const { status, errorMessage } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   const isAuthenticating = useMemo(() => status === "checking", [status]);
 
-  const { register, onResetForm, onSubmit } = useForm({
-    email: "",
-    password: "",
-  });
+  const { register, onSubmit } = useForm(initialState);
 
   const handleSubmit = (data) => {
     dispatch(startLoginWithEmailPassword(data));
@@ -31,7 +40,10 @@ export const LoginPage = () => {
 
   return (
     <AuthLayout title="Iniciar Sesión">
-      <form onSubmit={onSubmit(handleSubmit)} className="animate__animated animate__fadeIn animate__faster">
+      <form
+        onSubmit={onSubmit(handleSubmit)}
+        className="animate__animated animate__fadeIn animate__faster"
+      >
         <Grid container>
           <Grid item xs={12}>
             <TextField
