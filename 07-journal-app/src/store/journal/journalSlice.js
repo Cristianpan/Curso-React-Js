@@ -1,20 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const initialState = {
+  isSaving: false,
+  messageSaved: "",
+  notes: [],
+  active: null,
+};
+
 export const journalSlice = createSlice({
   name: "journal",
-  initialState: {
-    isSaving: false,
-    messageSaved: "",
-    notes: [],
-    active: null,
-    /* active: {
-      id: "ABASD",
-      title: "",
-      body: "",
-      date: 12313,
-      imageUrls: [],
-    }, */
-  },
+  initialState,
   reducers: {
     savingNewNote: (state, action) => {
       state.isSaving = true;
@@ -45,6 +40,17 @@ export const journalSlice = createSlice({
 
       state.messageSaved = `${payload.title}, actualizada correctamente`;
     },
+    setPhotosToActiveNote: (state, { payload }) => {
+      state.active.imageUrls = [...state.active.imageUrls, ...payload];
+      state.isSaving = false;
+    },
+    clearNotesLogout: (state) => {
+      state = initialState;
+    },
+    deleteNoteById: (state, { payload }) => {
+      state.notes = state.notes.filter((note) => note.id !== payload);
+      state.active = null;
+    },
   },
 });
 export const {
@@ -54,4 +60,7 @@ export const {
   setSaving,
   savingNewNote,
   updateNotes,
+  setPhotosToActiveNote,
+  clearNotesLogout,
+  deleteNoteById,
 } = journalSlice.actions;
