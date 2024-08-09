@@ -1,5 +1,5 @@
 export const fileUpload = async (file) => {
-  if (!file) throw new Error("No tenemos ningún archivo por subir");
+  if (!file) throw new Error("No se ha enviado algún archivo por subir");
   const cloudUrl = "https://api.cloudinary.com/v1_1/dvdcmtimn/upload";
 
   const formData = new FormData();
