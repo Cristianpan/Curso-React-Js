@@ -1,0 +1,1 @@
+export const urlPattern = /^https?:\/\/[^\s/$.?#].[^\s]*$/i;
